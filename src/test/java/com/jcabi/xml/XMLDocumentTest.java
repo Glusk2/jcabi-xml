@@ -467,14 +467,14 @@ public final class XMLDocumentTest {
     @Test
     public void bug() throws Exception {
         final XML xml = new XMLDocument(
-            this.getClass().getResource("tecajnica.xml")
-        ).registerNs("bsi", "http://www.bsi.si");
+            "<r><p a='1'/><p a='2'/></r>"
+        );
         MatcherAssert.assertThat(
-            xml.nodes("//bsi:tecajnica")
+            xml.nodes("//p")
                .get(1)
-               .xpath("//bsi:tecajnica/@datum")
+               .xpath("//p/@a")
                .get(0),
-            Matchers.equalTo("2007-01-02")
+            Matchers.equalTo("2")
         );
     }
 }
