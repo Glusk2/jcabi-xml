@@ -460,4 +460,21 @@ public final class XMLDocumentTest {
         );
     }
 
+    /**
+     * XMLDocument bug.
+     * @throws Exception If something goes wrong inside
+     */
+    @Test
+    public void bug() throws Exception {
+        final XML xml = new XMLDocument(
+            this.getClass().getResource("tecajnica.xml")
+        ).registerNs("bsi", "http://www.bsi.si");
+        MatcherAssert.assertThat(
+            xml.nodes("//bsi:tecajnica")
+               .get(1)
+               .xpath("//bsi:tecajnica/@datum")
+               .get(0),
+            Matchers.equalTo("2007-01-02")
+        );
+    }
 }
